@@ -1,0 +1,28 @@
+<!-- <!DOCTYPE html>
+<html>
+  <head>
+    <title>Sinatra app Contact form</title>
+  </head>
+  <body> -->
+    <h1>Contact us</h1>
+
+    <!-- this will submit a post request to URL: /contact.
+    In Sinatra, you must have:  
+    post "/contact" do ... end-->
+    <form action="/contact" method="post">
+      <label for="fname">Name</label>
+      <input type="text" name="full_name" placeholder="e.g. John Smith" id="fname" />
+
+      <label for="uemail">Email:</label>
+      <input type="email" name="user_email" placeholder="email" id="uemail" />
+
+      <label for="msg">Message:</label>
+      <textarea name="message", id="msg" placeholder="Tell us your thoughts"></textarea>
+
+      <br>
+      <input type="submit" value="Contact Us" />
+    </form>
+<!-- 
+  </body>
+</html>
+ -->
