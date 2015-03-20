@@ -25,8 +25,14 @@ end
 # remove column will not work, change to property will also get updated.
 Contact.auto_upgrade!
 
+
 # this enables us to have patch and delete if we send a parameter called _method with value "patch" or "delete"
 use Rack::MethodOverride
+
+
+# This allows us to use the sessions feature of Sinatra, so we can have bits of info between different request be remembered.  use as a one giant hash, until they clear their cookies:
+# session[:key] = "value"
+enable :sessions
 
 
 #copied over from "http://www.sinatrarb.com/faq.html#auth"
@@ -46,9 +52,9 @@ end
 
 # routes in Sinatra
 
-get '/' do
-  "Everybody can see this page"
-end
+# get '/' do
+#   "Everybody can see this page"
+# end
 
 get '/protected' do
   protected!
@@ -60,9 +66,18 @@ end
 # "Hello! Welcome to CodeCore!" -> this is the response
 get "/" do
   @name = params[:name]
-    # by convention, render the views/index.erb file
+
+
+  # by convention, render the views/index.erb file
   erb :index, layout: :application
 end
+
+post "/" do
+  session[:background_color] = params[:color]
+#  params.to_s
+  redirect to("/")
+end
+
 
 # format to pass in params in the URL use:  "?" and "&"
 # http://l#ocalhost:4567/about?name=Tam&city=Vancouver&country=Canada
@@ -119,9 +134,12 @@ get "/all_contacts" do
 end
 
 get "/contact/:id" do |id|
-  protected!
+  protected! #Sinatra auth helper determines authentication rights
 
   @contact = Contact.get(id)
+  # store a session cookie info
+  session[:last_visited_username] = @contact.name
+
   erb :contact, layout: :application
 end
 
@@ -144,4 +162,10 @@ delete "/contact/:id" do |id|
   contact.destroy
 
   redirect to("/all_contacts")
+end
+
+# color exercise in Sinatra/DataMapper presentations
+get "/color/:the_color" do
+  session[:background_color] = params[:the_color]
+  redirect to("/")
 end

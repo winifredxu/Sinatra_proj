@@ -3,17 +3,33 @@
   <head>
     <title>Welcome to my Sinatra app</title>
     <link rel="stylesheet" type="text/css" href="/style.css" />
+    <style>
+      body {
+        background-color: <%= session[:background_color] %>;
+      }
+    </style>
   </head>
   <body>
+
     <a href="/">Home</a>
     |
     <a href="/contact">Contact Us</a>
     |
     <a href="/all_contacts">All Contacts</a>
+    |
+    <!-- use Session cookie to pull this info -->
+    You last visited: <%= session[:last_visited_username] %>
+    |
+    <a href="/color/red">Red</a>
+    <a href="/color/blue">Blue</a>
+    <a href="/color/green">Green</a>
+    <a href="/color/white">White</a>
+    |
+    Selected color: <%= session[:background_color] %>
 
     <hr>
     <%= yield %>
-
+    </div>
 
   </body>
 </html>
