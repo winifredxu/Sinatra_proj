@@ -109,6 +109,7 @@ end
 
 get "/all_contacts" do
 
+  # use "protected!" helper defined from above to use #auth via Sinatra helper
   protected!
 
   # this will fetch all the contacts records from the DB, query used will be like:
@@ -127,6 +128,7 @@ end
 patch "/contact/:id" do |id|
   protected!
 
+  #variable "contact" here is not an instance because it's only used in this function until contact.save
   contact = Contact.get(id)
   contact.note = params[:note]
   contact.save
