@@ -1,0 +1,17 @@
+<h1>All Contacts</h1>
+
+<table>
+  <tr>
+    <td>ID</td>
+    <td>Name</td>
+    <td>Email</td>
+  </tr>
+  <% @contacts.each do |c| %>
+    <tr>
+      <td><%= c.id %></td>
+      <td><%= c.name %></td>
+      <td><%= c.email %></td>
+      <td><a href="/contact/<%= c.id %>">View</a></td>
+    </tr>
+  <% end %>
+</table>

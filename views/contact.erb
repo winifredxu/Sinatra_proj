@@ -1,0 +1,20 @@
+<a href="/all_contacts">All Contacts</a>
+<h1>Displaying Info for <%= @contact.name %></h1>
+<p>Email: <%= @contact.email %></p>
+<p>Message: <%= @contact.msg %></p>
+<p>Note: <%= @contact.note %></p>
+
+<form method="post" action="/contact/<%= @contact.id %>">
+  <input type="hidden" name="_method" value="patch">
+  <label for="note">Note:</label>
+  <textarea name="note" id="note" placeholder="enter some notes here"><%= @contact.note %></textarea>
+
+  <br>
+  <input type="submit" value="Save Note" />
+</form>
+
+<form method="post" action="/contact/<%= @contact.id %>">
+  <input type="hidden" name="_method" value="delete">
+  <input type="submit" value="Delete contact" />
+</form>
+

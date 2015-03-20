@@ -1,0 +1,10 @@
+table {
+  width: 100%;
+  border: 1px solid;
+  font-style: sans-serif;
+}
+
+table, tr, td {
+  border: 1px solid;
+}
+
